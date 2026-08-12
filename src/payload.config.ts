@@ -60,6 +60,9 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
+      // Supabase's free-tier session pooler caps at 15 concurrent clients;
+      // each serverless invocation gets its own pool, so keep this low.
+      max: 3,
     },
   }),
   collections: [Pages, Posts, Media, Categories, Users],
