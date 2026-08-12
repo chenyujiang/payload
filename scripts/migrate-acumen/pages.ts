@@ -25,6 +25,16 @@ export type PageDef = {
 const pillars = (items: { title: string; body: string }[]): Col[] =>
   items.map((i) => ({ size: 'oneThird' as ColSize, nodes: [h(3, i.title), p(i.body)] }))
 
+const linkedPillars = (items: { title: string; body: string; url: string }[]): Col[] =>
+  items.map((i) => ({
+    size: 'oneThird' as ColSize,
+    nodes: [
+      h(3, i.title),
+      p(i.body),
+      pRuns([{ text: 'Learn more →', link: { url: i.url } }]),
+    ],
+  }))
+
 // ---------------------------------------------------------------------------
 
 const home: PageDef = {
@@ -56,18 +66,21 @@ const home: PageDef = {
             ),
           ],
         },
-        ...pillars([
+        ...linkedPillars([
           {
             title: 'ERP',
             body: 'We develop integrations for Microsoft Dynamics 365 Business Central — localised custom extensions, automated workflows, and advanced reporting that scale with your growth.',
+            url: '/services-implementation-business-central',
           },
           {
             title: 'eCommerce',
             body: 'Our expertise spans nopCommerce, Shopify and our own Alpha Commerce platform, connecting your storefront with ERP systems like Business Central and Accredo.',
+            url: '/services',
           },
           {
             title: 'HR & Payroll',
             body: 'A referring partner for Employment Hero — everything you need to manage your workforce, from Hiring to HR, Payroll and Benefits.',
+            url: '/our-partners-hr-payroll',
           },
         ]),
       ],
@@ -216,11 +229,27 @@ const servicesHub: PageDef = {
       type: 'content',
       columns: [
         { size: 'full', nodes: [h(2, 'Implementation')] },
-        ...pillars([
-          { title: 'Business Central', body: 'Microsoft Dynamics 365 Business Central implementation.' },
-          { title: 'NopCommerce', body: 'nopCommerce development & implementation services.' },
-          { title: 'Shopify', body: 'Shopify development & integration services.' },
-          { title: 'Alpha Commerce', body: 'Our own fully customizable eCommerce platform.' },
+        ...linkedPillars([
+          {
+            title: 'Business Central',
+            body: 'Microsoft Dynamics 365 Business Central implementation.',
+            url: '/services-implementation-business-central',
+          },
+          {
+            title: 'NopCommerce',
+            body: 'nopCommerce development & implementation services.',
+            url: '/services-implementation-nopcommerce',
+          },
+          {
+            title: 'Shopify',
+            body: 'Shopify development & integration services.',
+            url: '/services-implementation-shopify',
+          },
+          {
+            title: 'Alpha Commerce',
+            body: 'Our own fully customizable eCommerce platform.',
+            url: '/services-implementation-alpha-commerce',
+          },
         ]),
       ],
     },
@@ -228,10 +257,22 @@ const servicesHub: PageDef = {
       type: 'content',
       columns: [
         { size: 'full', nodes: [h(2, 'Development')] },
-        ...pillars([
-          { title: 'ERP Development', body: 'Custom Business Central extensions & customer portals.' },
-          { title: 'Web Development', body: 'High-converting business websites and eCommerce builds.' },
-          { title: 'Mobile Development', body: 'Mobile-first apps for Alpha Commerce and B2B portals.' },
+        ...linkedPillars([
+          {
+            title: 'ERP Development',
+            body: 'Custom Business Central extensions & customer portals.',
+            url: '/services-development-erp-development',
+          },
+          {
+            title: 'Web Development',
+            body: 'High-converting business websites and eCommerce builds.',
+            url: '/services-development-web-development',
+          },
+          {
+            title: 'Mobile Development',
+            body: 'Mobile-first apps for Alpha Commerce and B2B portals.',
+            url: '/services-development-mobile-development',
+          },
         ]),
       ],
     },
@@ -239,10 +280,11 @@ const servicesHub: PageDef = {
       type: 'content',
       columns: [
         { size: 'full', nodes: [h(2, 'Testing')] },
-        ...pillars([
+        ...linkedPillars([
           {
             title: 'BC Wave Upgrades',
             body: 'Seamless Business Central Wave upgrade testing, tested with confidence.',
+            url: '/services-testing-bc-wave-upgrades',
           },
         ]),
       ],
@@ -789,6 +831,7 @@ const applicationsHub: PageDef = {
             p(
               'Alpha Commerce is our fully customizable eCommerce platform, purpose-built for businesses that demand more than out-of-the-box solutions. Built on the powerful DNN framework, it adapts to your unique business processes and scales with your growth, with seamless integration to Business Central, Accredo, and Propella.',
             ),
+            pRuns([{ text: 'Learn more →', link: { url: '/applications-alpha-commerce' } }]),
           ],
         },
       ],
@@ -804,6 +847,7 @@ const applicationsHub: PageDef = {
             p(
               'Systems like Business Central update frequently, often without warning. Solution & Test Manager is a powerful extension that helps you document business processes directly within BC, capture real-world scenarios, create themed test scripts, streamline test execution, and onboard new users with real process walkthroughs.',
             ),
+            pRuns([{ text: 'Learn more →', link: { url: '/applications-solman' } }]),
           ],
         },
       ],
@@ -819,6 +863,21 @@ const applicationsHub: PageDef = {
             p(
               "We've extended Business Central's Data Exchange Framework with a localized NZ banking extension: extra fields and logic for NZ banking standards, EFT payment file export compatible with all major NZ banks, and easy bank statement import for reconciliation.",
             ),
+          ],
+        },
+      ],
+    },
+    {
+      type: 'content',
+      columns: [
+        {
+          size: 'full',
+          nodes: [
+            h(2, 'Microsoft Power Platform'),
+            p(
+              'Empower your organisation by building apps, automating workflows, and harnessing AI — with enterprise-grade governance and over 1000 Power Platform connectors.',
+            ),
+            pRuns([{ text: 'Learn more →', link: { url: '/applications-power-platform' } }]),
           ],
         },
       ],
@@ -1250,18 +1309,21 @@ const ourPartnersHub: PageDef = {
       type: 'content',
       columns: [
         { size: 'full', nodes: [h(2, 'Who We Work With')] },
-        ...pillars([
+        ...linkedPillars([
           {
             title: 'Solver',
             body: 'AI-powered extended financial planning & analysis (xFP&A), integrated with Business Central.',
+            url: '/our-partners-solver',
           },
           {
             title: 'HR & Payroll (Employment Hero)',
             body: "The world's first Employment Operating System — Hiring, HR, Payroll and Benefits under one roof.",
+            url: '/our-partners-hr-payroll',
           },
           {
             title: 'Codeless Platform',
             body: 'Drag-and-drop business process automation and system integration.',
+            url: '/our-partners-codeless-platform',
           },
         ]),
       ],
